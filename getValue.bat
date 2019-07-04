@@ -1,8 +1,8 @@
 @echo off
-IF %1==dynamic_ip (
+IF "%1"=="dynamic_ip" (
   GOTO :GETIP %1
 )
-IF %1==ip (
+IF "%1"=="ip" (
   GOTO :GETIP %1
 ) ELSE (
   GOTO :READCONFIG %1
@@ -10,10 +10,10 @@ IF %1==ip (
 
 :GETIP
   call getValue.bat record_type
-  IF %record_type%==AAAA (
+  IF "%record_type%"=="AAAA" (
     FOR /F %%i IN ('curl ipv6.ip.sb') DO (set %1=%%i)
   )
-  IF %record_type%==A (
+  IF "%record_type%"=="A" (
     FOR /F %%i IN ('curl ipv4.ip.sb') DO (set %1=%%i)
   )
   GOTO :EOF
